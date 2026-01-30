@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Landing Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    background:#f2f4f8;
+}
+
+/* Navbar */
+nav{
+    background:#222;
+    color:#fff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav h2{
+    font-weight:600;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:20px;
+}
+
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+nav ul li a:hover{
+    color:#00bcd4;
+}
+
+/* Hero */
+.hero{
+    position: relative;
+    background:#ffffff;
+    padding:60px 40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.hero.show{
+    opacity:1;
+    transform: translateY(0);
+}
+
+.hero-container{
+    position: relative;
+    width:100%;
+    max-width:1200px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.hero-text{
+    position: relative;
+    z-index:1;
+    max-width:600px;
+}
+
+.hero-text h1{
+    font-size:34px;
+    margin-bottom:15px;
+    color:#222;
+}
+
+.hero-text p{
+    font-size:15px;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.hero-text button{
+    padding:12px 26px;
+    background:#0066ff;
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+/* Hero watermark image */
+.hero-watermark{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:200px;       /* smaller size */
+    height:200px;      /* keep square */
+    opacity:0.1;      /* very light watermark */
+    object-fit:cover;
+    z-index:0;
+    pointer-events: none; /* allow clicking above it */
+    border-radius:50%; /* optional round watermark */
+}
+
+/* About */
+.about{
+    background:#f9fafc;
+    padding:60px 40px;
+    display:flex;
+    gap:40px;
+    align-items:center;
+    opacity:0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.about.show{
+    opacity:1;
+    transform: translateY(0);
+}
+
+#about img {
+    width: 180px;         /* smaller circular image */
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid #0066ff;
+}
+
+.about-text h2{
+    margin-bottom:15px;
+}
+
+.about-text p{
+    font-size:15px;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.about-text button{
+    padding:10px 22px;
+    background:#0066ff;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+/* Projects */
+.projects{
+    padding:60px 40px;
+    text-align:center;
+    opacity:0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.projects.show{
+    opacity:1;
+    transform: translateY(0);
+}
+
+.projects h2{
+    margin-bottom:30px;
+}
+
+.project-container{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.project-card{
+    background:#f3f3f3;
+    width:230px;
+    padding:18px;
+    border-radius:14px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.08);
+    text-align:center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover{
+    transform: translateY(-5px);
+    box-shadow:0 10px 20px rgba(0,0,0,0.12);
+}
+
+.project-card img{
+    width:100%;
+    height:140px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.project-title{
+    background:#2f7df6;
+    color:white;
+    padding:12px;
+    border-radius:10px;
+    margin:15px 0;
+    font-size:14px;
+}
+
+.project-desc{
+    font-size:13px;
+}
+
+/* Skills */
+.skills{
+    background:#ffffff;
+    padding:60px 40px;
+    text-align:center;
+    opacity:0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.skills.show{
+    opacity:1;
+    transform: translateY(0);
+}
+
+.skills-container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+}
+
+.skills-container span{
+    background:#0066ff;
+    color:white;
+    padding:10px 18px;
+    border-radius:20px;
+    font-size:14px;
+}
+
+/* Resume */
+.resume{
+    text-align:center;
+    padding:60px 40px;
+    opacity:0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.resume.show{
+    opacity:1;
+    transform: translateY(0);
+}
+
+.resume .btn,
+.resume-btn{
+    margin-top:15px;
+    display:inline-block;
+    padding:12px 26px;
+    background:#0066ff;
+    color:white;
+    border:none;
+    border-radius:5px;
+    text-decoration:none;
+}
+
+/* Contact */
+.contact{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:60px 40px;
+    opacity:0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.contact.show{
+    opacity:1;
+    transform: translateY(0);
+}
+
+.contact a{
+    color:#00bcd4;
+    text-decoration:none;
+    margin:0 5px;
+}
+
+/* Responsive */
+@media(max-width:768px){
+    nav ul{
+        display:none;
+    }
+
+    .hero, .about{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero-text, .about-text{
+        max-width:100%;
+    }
+
+    .project-container{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .hero-watermark{
+        width:120px;
+        height:120px;
+    }
+
+    #about img{
+        width:120px;
+        height:120px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <h2> B J S V D Durga  </h2>
+    <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+    <div class="hero-container">
+        <div class="hero-text">
+            <h1>Hello, I’m B J S V D Durga  👋</h1>
+            <p>I’m a Web Development Intern passionate about creating clean, responsive, and user-friendly websites. I enjoy learning new technologies and building real projects.</p>
+            <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Me</button>
+        </div>
+        <!-- Subtle watermark profile image -->
+        <img src="https://www.upload.ee/image/19032277/WhatsApp_Image_2026-01-30_at_8.16.36_PM.jpeg" alt="Profile Image" class="hero-watermark">
+    </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+    <img src="https://www.upload.ee/image/19032277/WhatsApp_Image_2026-01-30_at_8.16.36_PM.jpeg" alt="About Image">
+    <div class="about-text">
+        <h2>About Me</h2>
+        <p>I am currently pursuing <strong>3rd year B.Tech</strong> while gaining practical experience through internships. I focus on HTML, CSS, and JavaScript and enjoy designing modern web pages.</p>
+        <a href="https://i.postimg.cc/zB0fw8NY/resume-5.png" download><button>Download Resume</button></a>
+    </div>
+</section>
+
+<!-- Projects -->
+<section class="projects" id="projects">
+    <h2>My Projects</h2>
+    <div class="project-container">
+        <div class="project-card">
+            <img src="https://i.postimg.cc/CxjVvdFn/project1-jpg.jpg" alt="Blood Donation">
+            <div class="project-title">Blood Donation Management System</div>
+            <p class="project-desc">Manages donor details and blood availability.</p>
+        </div>
+        <div class="project-card">
+            <img src="https://i.postimg.cc/YqVHwjR8/Whats-App-Image-2026-01-29-at-11-29-51-PM.jpg" alt="Health & Hygiene">
+            <div class="project-title">Health & Hygiene Awareness System</div>
+            <p class="project-desc">Promotes health awareness and monitors hygiene-related data.</p>
+        </div>
+        <div class="project-card">
+            <img src="https://iili.io/fLu9jUB.png" alt="SmartShop">
+            <div class="project-title">SmartShop | E-commerce Website</div>
+            <p class="project-desc">A modern e-commerce website with responsive layout and clean UI.</p>
+        </div>
+        <div class="project-card">
+            <img src="https://iili.io/fLTsWvf.png" alt="Calculator">
+            <div class="project-title">Calculator</div>
+            <p class="project-desc">A functional calculator built using HTML, CSS, and JavaScript.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Skills -->
+<section class="skills" id="skills">
+    <h2>My Skills</h2>
+    <div class="skills-container">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>Python</span>
+        <span>Problem Solving</span>
+        <span>Teamwork</span>
+    </div>
+</section>
+
+<!-- Resume -->
+<section class="resume" id="resume">
+    <h2>Resume</h2>
+    <p>Click below to view my resume</p>
+    <a href="resume.html" target="_blank" class="btn resume-btn">View Resume</a>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+    <h2>Contact Me</h2>
+    <p>📧 jyothibalasadi7@gmail.com</p>
+    <p>📍 Katrenikona, Andhra Pradesh, India</p>
+    <div>
+        <a href="https://www.linkedin.com/in/jyothibalasadi7" target="_blank">LinkedIn</a> |
+        <a href="https://github.com/jyothibalasadi7" target="_blank">GitHub</a>
+    </div>
+</section>
+
+<!-- Scroll Animation JS -->
+<script>
+const sections = document.querySelectorAll(".hero, .about, .projects, .skills, .resume, .contact");
+
+const revealSections = () => {
+    sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if(top < windowHeight - 100){
+            section.classList.add("show");
+        }
+    });
+};
+
+window.addEventListener("scroll", revealSections);
+window.addEventListener("load", revealSections);
+</script>
+
+</body>
+</html>
